@@ -6,7 +6,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/:$COMMIT_SHA',
+      '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/app:$COMMIT_SHA',
       '.'
     ]
 
@@ -14,10 +14,10 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/:$COMMIT_SHA'
+      'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/app:$COMMIT_SHA'
     ]
 
 
 
 images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/app:$COMMIT_SHA'

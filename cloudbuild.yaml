@@ -2,7 +2,6 @@ options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 
 steps:
-  # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
@@ -10,13 +9,20 @@ steps:
       '.'
     ]
 
-  # Step 2: Push the image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
       'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/app:$COMMIT_SHA'
     ]
 
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [
+      'run', 'deploy', 'rohit-101002678',
+      '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/rohit-101002678/app:$COMMIT_SHA',
+      '--region', 'us-central1',
+      '--allow-unauthenticated'
+    ]
 
 
 images:
